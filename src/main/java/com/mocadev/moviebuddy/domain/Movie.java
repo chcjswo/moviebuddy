@@ -1,4 +1,4 @@
-package com.mocadev.moviebuddy;
+package com.mocadev.moviebuddy.domain;
 
 import java.net.URL;
 import java.time.LocalDate;
