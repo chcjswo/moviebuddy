@@ -9,7 +9,7 @@ class MovieFinderTest {
 
 	@Test
 	void mainTest() {
-		MovieFinder movieFinder = new MovieFinder();
+		MovieFinder movieFinder = new CsvMovieFinder();
 
 		List<Movie> result = movieFinder.directedBy("Michael Bay");
 		assertEquals(3, result.size());

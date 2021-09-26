@@ -1,5 +1,6 @@
 package com.mocadev.moviebuddy;
 
+import com.mocadev.moviebuddy.domain.CsvMovieFinder;
 import com.mocadev.moviebuddy.domain.Movie;
 import com.mocadev.moviebuddy.domain.MovieFinder;
 import java.io.BufferedReader;
@@ -22,7 +23,7 @@ public class MoviebuddyApplication {
 	}
 
 	public void run(String[] args) throws Exception {
-		final MovieFinder movieFinder = new MovieFinder();
+		final MovieFinder movieFinder = new CsvMovieFinder();
 		final AtomicBoolean running = new AtomicBoolean(true);
 		final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		final PrintWriter output = new PrintWriter(System.out, false);
