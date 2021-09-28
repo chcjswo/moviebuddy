@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
  * @github https://github.com/chcjswo
  * @since 2021-09-26
  **/
-public abstract class MovieFinder {
+public class MovieFinder {
+
+	private final MovieReader movieReader = new CsvMovieReader();
 
 	/**
 	 * 저장된 영화 목록에서 감독으로 영화를 검색한다.
@@ -20,7 +22,7 @@ public abstract class MovieFinder {
 	 * @return 검색된 영화 목록
 	 */
 	public List<Movie> directedBy(String directedBy) {
-		return loadMovies().stream()
+		return movieReader.loadMovies().stream()
 			.filter(it -> it.getDirector().toLowerCase().contains(directedBy.toLowerCase()))
 			.collect(Collectors.toList());
 	}
@@ -31,16 +33,9 @@ public abstract class MovieFinder {
 	 * @return 검색된 영화 목록
 	 */
 	public List<Movie> releasedYearBy(int releasedYearBy) {
-		return loadMovies().stream()
+		return movieReader.loadMovies().stream()
 			.filter(it -> Objects.equals(it.getReleaseYear(), releasedYearBy))
 			.collect(Collectors.toList());
 	}
-
-	/**
-	 * 영화 메타데이터를 읽어 저장된 영화 목록을 불러온다.
-	 *
-	 * @return 불러온 영화 목록
-	 */
-	public abstract List<Movie> loadMovies();
 
 }

@@ -7,12 +7,10 @@ import java.util.List;
  * @version 1.0.0
  * @blog https://mocadev.tistory.com
  * @github https://github.com/chcjswo
- * @since 2021-09-27
+ * @since 2021-09-28
  **/
-public class XmlMovieFinder extends MovieFinder {
+public interface MovieReader {
 
-	public List<Movie> loadMovies() {
-		return null;
-	}
+	List<Movie> loadMovies();
 
 }

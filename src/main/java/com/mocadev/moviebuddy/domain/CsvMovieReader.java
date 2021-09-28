@@ -19,10 +19,11 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  * @blog https://mocadev.tistory.com
  * @github https://github.com/chcjswo
- * @since 2021-09-27
+ * @since 2021-09-28
  **/
-public class CsvMovieFinder extends MovieFinder {
+public class CsvMovieReader implements MovieReader {
 
+	@Override
 	public List<Movie> loadMovies() {
 		try {
 			final URI resourceUri = ClassLoader.getSystemResource("movie_metadata.csv").toURI();
