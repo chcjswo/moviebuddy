@@ -3,6 +3,9 @@ package com.mocadev.moviebuddy.domain;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 /**
  * @author chcjswo
@@ -11,11 +14,12 @@ import java.util.stream.Collectors;
  * @github https://github.com/chcjswo
  * @since 2021-09-26
  **/
+@Service
 public class MovieFinder {
 
 	private final MovieReader movieReader;
 
-	public MovieFinder(MovieReader movieReader) {
+	public MovieFinder(@Qualifier("csvMovieReader") MovieReader movieReader) {
 		this.movieReader = Objects.requireNonNull(movieReader);
 	}
 

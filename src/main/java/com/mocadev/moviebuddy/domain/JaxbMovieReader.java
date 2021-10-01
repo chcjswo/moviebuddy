@@ -10,6 +10,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author chcjswo
@@ -18,6 +19,7 @@ import javax.xml.transform.stream.StreamSource;
  * @github https://github.com/chcjswo
  * @since 2021-09-29
  **/
+@Repository
 public class JaxbMovieReader implements MovieReader {
 
 	@Override
