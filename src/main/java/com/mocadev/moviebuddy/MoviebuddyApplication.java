@@ -15,6 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MoviebuddyApplication {
 
@@ -23,8 +25,9 @@ public class MoviebuddyApplication {
 	}
 
 	public void run(String[] args) throws Exception {
-		final MovieBuddyFactory movieBuddyFactory = new MovieBuddyFactory();
-		final MovieFinder movieFinder = movieBuddyFactory.movieFinder();
+		final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MovieBuddyFactory.class);
+		final MovieFinder movieFinder = applicationContext.getBean(MovieFinder.class);
+
 		final AtomicBoolean running = new AtomicBoolean(true);
 		final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		final PrintWriter output = new PrintWriter(System.out, false);
