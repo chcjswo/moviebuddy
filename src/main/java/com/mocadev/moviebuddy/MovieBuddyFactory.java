@@ -1,9 +1,9 @@
 package com.mocadev.moviebuddy;
 
-import com.mocadev.moviebuddy.domain.CsvMovieReader;
 import com.mocadev.moviebuddy.domain.MovieFinder;
 import com.mocadev.moviebuddy.domain.MovieReader;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -20,6 +20,7 @@ MovieBuddyFactory.DomainModuleConfig.class})
 public class MovieBuddyFactory {
 
 	@Configuration
+	@ComponentScan
 	static class DomainModuleConfig {
 		@Bean
 		public MovieFinder movieFinder(MovieReader movieReader) {
@@ -29,10 +30,6 @@ public class MovieBuddyFactory {
 
 	@Configuration
 	 static class DataSourceModuleConfig {
-		@Bean
-		public MovieReader movieReader() {
-			return new CsvMovieReader();
-		}
 	}
 
 }
