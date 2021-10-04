@@ -1,6 +1,8 @@
-package com.mocadev.moviebuddy.domain;
+package com.mocadev.moviebuddy.data;
 
 import com.mocadev.moviebuddy.ApplicationException;
+import com.mocadev.moviebuddy.domain.Movie;
+import com.mocadev.moviebuddy.domain.MovieReader;
 import com.mocadev.moviebuddy.util.FileSystemUtils;
 import java.io.IOException;
 import java.net.URI;

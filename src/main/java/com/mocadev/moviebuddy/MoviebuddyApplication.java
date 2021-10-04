@@ -1,6 +1,5 @@
 package com.mocadev.moviebuddy;
 
-import com.mocadev.moviebuddy.domain.CsvMovieReader;
 import com.mocadev.moviebuddy.domain.Movie;
 import com.mocadev.moviebuddy.domain.MovieFinder;
 import java.io.BufferedReader;

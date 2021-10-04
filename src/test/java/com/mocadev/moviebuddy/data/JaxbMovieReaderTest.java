@@ -1,6 +1,8 @@
-package com.mocadev.moviebuddy.domain;
+package com.mocadev.moviebuddy.data;
 
 import com.mocadev.moviebuddy.MovieBuddyFactory;
+import com.mocadev.moviebuddy.data.JaxbMovieReader;
+import com.mocadev.moviebuddy.domain.Movie;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

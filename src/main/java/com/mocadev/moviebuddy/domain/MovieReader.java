@@ -1,5 +1,6 @@
 package com.mocadev.moviebuddy.domain;
 
+import com.mocadev.moviebuddy.domain.Movie;
 import java.util.List;
 
 /**
