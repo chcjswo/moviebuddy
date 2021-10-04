@@ -1,8 +1,11 @@
 package com.mocadev.moviebuddy.domain;
 
+import com.mocadev.moviebuddy.MovieBuddyFactory;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * @author chcjswo
@@ -11,11 +14,14 @@ import org.junit.jupiter.api.Test;
  * @github https://github.com/chcjswo
  * @since 2021-09-29
  **/
+@SpringJUnitConfig(MovieBuddyFactory.class)
 class JaxbMovieReaderTest {
+
+	@Autowired
+	JaxbMovieReader jaxbMovieReader;
 
 	@Test
 	void notEmpty_LoadMovies() {
-		JaxbMovieReader jaxbMovieReader = new JaxbMovieReader();
 		final List<Movie> movies = jaxbMovieReader.loadMovies();
 		for (Movie movie : movies) {
 			System.out.println("movie = " + movie);
