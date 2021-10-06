@@ -1,6 +1,7 @@
 package com.mocadev.moviebuddy.data;
 
 import com.mocadev.moviebuddy.ApplicationException;
+import com.mocadev.moviebuddy.MovieBuddyProfile;
 import com.mocadev.moviebuddy.domain.Movie;
 import com.mocadev.moviebuddy.domain.MovieData;
 import com.mocadev.moviebuddy.domain.MovieReader;
@@ -13,6 +14,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Repository;
  * @since 2021-09-29
  **/
 @Repository
+@Profile(MovieBuddyProfile.XML_MODE)
 public class JaxbMovieReader implements MovieReader {
 
 	@Override

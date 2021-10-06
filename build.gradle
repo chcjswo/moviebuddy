@@ -21,6 +21,8 @@ dependencies {
 	implementation 'org.springframework:spring-context-support:5.3.10'
 
 	testImplementation 'org.springframework:spring-test:5.3.10'
+
+	implementation 'ch.qos.logback:logback-classic:1.2.6'
 }
 
 java {

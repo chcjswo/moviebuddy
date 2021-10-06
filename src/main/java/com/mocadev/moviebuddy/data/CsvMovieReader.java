@@ -1,6 +1,7 @@
 package com.mocadev.moviebuddy.data;
 
 import com.mocadev.moviebuddy.ApplicationException;
+import com.mocadev.moviebuddy.MovieBuddyProfile;
 import com.mocadev.moviebuddy.domain.Movie;
 import com.mocadev.moviebuddy.domain.MovieReader;
 import com.mocadev.moviebuddy.util.FileSystemUtils;
@@ -15,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -25,6 +27,7 @@ import org.springframework.stereotype.Repository;
  * @since 2021-09-28
  **/
 @Repository
+@Profile(MovieBuddyProfile.CSV_MODE)
 public class CsvMovieReader implements MovieReader {
 
 	@Override

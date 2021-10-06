@@ -3,12 +3,15 @@ package com.mocadev.moviebuddy.domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.mocadev.moviebuddy.MovieBuddyFactory;
+import com.mocadev.moviebuddy.MovieBuddyProfile;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+@ActiveProfiles(MovieBuddyProfile.CSV_MODE)
 @SpringJUnitConfig(MovieBuddyFactory.class)
 class MovieFinderTest {
 
