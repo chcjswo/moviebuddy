@@ -5,16 +5,16 @@ import com.mocadev.moviebuddy.MovieBuddyProfile;
 import com.mocadev.moviebuddy.domain.Movie;
 import com.mocadev.moviebuddy.domain.MovieData;
 import com.mocadev.moviebuddy.domain.MovieReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import org.springframework.context.annotation.Profile;
+import org.springframework.oxm.Unmarshaller;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -26,20 +26,23 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 @Profile(MovieBuddyProfile.XML_MODE)
-public class JaxbMovieReader implements MovieReader {
+public class XmlMovieReader implements MovieReader {
+
+	private final Unmarshaller unmarshaller;
+
+	public XmlMovieReader(Unmarshaller unmarshaller) {
+		this.unmarshaller = Objects.requireNonNull(unmarshaller);
+	}
 
 	@Override
 	public List<Movie> loadMovies() {
 		try {
-			final JAXBContext jaxb = JAXBContext.newInstance(MovieMetadata.class);
-			final Unmarshaller unmarshaller = jaxb.createUnmarshaller();
-
 			final InputStream content = ClassLoader.getSystemResourceAsStream("movie_metadata.xml");
 			final Source source = new StreamSource(content);
 			final MovieMetadata movieMetadata = (MovieMetadata) unmarshaller.unmarshal(source);
 
 			return movieMetadata.toMovies();
-		} catch (JAXBException e) {
+		} catch (IOException e) {
 			throw new ApplicationException("failed to load movies data: ", e);
 		}
 	}

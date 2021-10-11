@@ -1,8 +1,10 @@
 package com.mocadev.moviebuddy;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 /**
  * @author chcjswo
@@ -16,6 +18,14 @@ import org.springframework.context.annotation.Import;
 MovieBuddyFactory.DomainModuleConfig.class})
 @ComponentScan
 public class MovieBuddyFactory {
+
+	@Bean
+	public Jaxb2Marshaller jaxb2Marshaller() {
+		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+		marshaller.setPackagesToScan("com.mocadev.moviebuddy");
+
+		return marshaller;
+	}
 
 	@Configuration
 	static class DomainModuleConfig {
