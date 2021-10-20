@@ -34,19 +34,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 @Profile(MovieBuddyProfile.CSV_MODE)
-public class CsvMovieReader implements MovieReader {
-
-	private final Logger log = LoggerFactory.getLogger(getClass());
-
-	private String metaData;
-
-	public String getMetaData() {
-		return metaData;
-	}
-
-	public void setMetaData(String metaData) {
-		this.metaData = Objects.requireNonNull(metaData, "metadata is required value");
-	}
+public class CsvMovieReader extends AbstractFileSystemMovieReader implements MovieReader {
 
 	@Override
 	public List<Movie> loadMovies() {
@@ -83,22 +71,6 @@ public class CsvMovieReader implements MovieReader {
 		} catch (IOException | URISyntaxException error) {
 			throw new ApplicationException("failed to load movies data.", error);
 		}
-	}
-
-	@PostConstruct
-	public void afterPropertiesSet() throws Exception {
-		final URL url = ClassLoader.getSystemResource(metaData);
-		if (Objects.isNull(url)) {
-			throw new FileNotFoundException(metaData);
-		}
-		if (!Files.isReadable(Path.of(url.toURI()))) {
-			throw new ApplicationException(String.format("cannot read to metadata. [%s]", metaData));
-		}
-	}
-
-	@PreDestroy
-	public void destroy() throws Exception {
-		log.info("destroy bean");
 	}
 
 }

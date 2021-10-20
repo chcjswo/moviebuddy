@@ -26,7 +26,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 @Profile(MovieBuddyProfile.XML_MODE)
-public class XmlMovieReader implements MovieReader {
+public class XmlMovieReader extends AbstractFileSystemMovieReader implements MovieReader {
 
 	private final Unmarshaller unmarshaller;
 
@@ -37,7 +37,7 @@ public class XmlMovieReader implements MovieReader {
 	@Override
 	public List<Movie> loadMovies() {
 		try {
-			final InputStream content = ClassLoader.getSystemResourceAsStream("movie_metadata.xml");
+			final InputStream content = ClassLoader.getSystemResourceAsStream(getMetaData());
 			final Source source = new StreamSource(content);
 			final MovieMetadata movieMetadata = (MovieMetadata) unmarshaller.unmarshal(source);
 

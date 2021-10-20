@@ -1,6 +1,8 @@
 package com.mocadev.moviebuddy;
 
+import com.mocadev.moviebuddy.data.AbstractFileSystemMovieReader;
 import com.mocadev.moviebuddy.data.CsvMovieReader;
+import com.mocadev.moviebuddy.data.XmlMovieReader;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
+import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 /**
@@ -43,6 +46,14 @@ public class MovieBuddyFactory {
 		public CsvMovieReader csvMovieReader() {
 			CsvMovieReader movieReader = new CsvMovieReader();
 			movieReader.setMetaData("movie_metadata.csv");
+			return movieReader;
+		}
+
+		@Profile(MovieBuddyProfile.XML_MODE)
+		@Bean
+		public XmlMovieReader xmlMovieReader(Unmarshaller unmarshaller) {
+			XmlMovieReader movieReader = new XmlMovieReader(unmarshaller);
+			movieReader.setMetaData("movie_metadata.xml");
 			return movieReader;
 		}
 
