@@ -18,10 +18,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -34,7 +34,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 @Profile(MovieBuddyProfile.CSV_MODE)
-public class CsvMovieReader implements MovieReader, InitializingBean, DisposableBean {
+public class CsvMovieReader implements MovieReader {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -85,7 +85,7 @@ public class CsvMovieReader implements MovieReader, InitializingBean, Disposable
 		}
 	}
 
-	@Override
+	@PostConstruct
 	public void afterPropertiesSet() throws Exception {
 		final URL url = ClassLoader.getSystemResource(metaData);
 		if (Objects.isNull(url)) {
@@ -96,7 +96,7 @@ public class CsvMovieReader implements MovieReader, InitializingBean, Disposable
 		}
 	}
 
-	@Override
+	@PreDestroy
 	public void destroy() throws Exception {
 		log.info("destroy bean");
 	}
