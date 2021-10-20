@@ -5,6 +5,7 @@ import com.mocadev.moviebuddy.MovieBuddyProfile;
 import com.mocadev.moviebuddy.domain.Movie;
 import com.mocadev.moviebuddy.domain.MovieReader;
 import com.mocadev.moviebuddy.util.FileSystemUtils;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,6 +18,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -29,7 +34,9 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 @Profile(MovieBuddyProfile.CSV_MODE)
-public class CsvMovieReader implements MovieReader {
+public class CsvMovieReader implements MovieReader, InitializingBean, DisposableBean {
+
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	private String metaData;
 
@@ -76,6 +83,22 @@ public class CsvMovieReader implements MovieReader {
 		} catch (IOException | URISyntaxException error) {
 			throw new ApplicationException("failed to load movies data.", error);
 		}
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		final URL url = ClassLoader.getSystemResource(metaData);
+		if (Objects.isNull(url)) {
+			throw new FileNotFoundException(metaData);
+		}
+		if (!Files.isReadable(Path.of(url.toURI()))) {
+			throw new ApplicationException(String.format("cannot read to metadata. [%s]", metaData));
+		}
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		log.info("destroy bean");
 	}
 
 }

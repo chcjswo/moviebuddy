@@ -1,6 +1,8 @@
 package com.mocadev.moviebuddy;
 
 import com.mocadev.moviebuddy.data.CsvMovieReader;
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
