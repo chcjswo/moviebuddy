@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.springframework.context.annotation.Profile;
@@ -30,10 +31,20 @@ import org.springframework.stereotype.Repository;
 @Profile(MovieBuddyProfile.CSV_MODE)
 public class CsvMovieReader implements MovieReader {
 
+	private String metaData;
+
+	public String getMetaData() {
+		return metaData;
+	}
+
+	public void setMetaData(String metaData) {
+		this.metaData = Objects.requireNonNull(metaData, "metadata is required value");
+	}
+
 	@Override
 	public List<Movie> loadMovies() {
 		try {
-			final URI resourceUri = ClassLoader.getSystemResource("movie_metadata.csv").toURI();
+			final URI resourceUri = ClassLoader.getSystemResource(getMetaData()).toURI();
 			final Path data = Path.of(FileSystemUtils.checkFileSystem(resourceUri));
 			final Function<String, Movie> mapCsv = csv -> {
 				try {

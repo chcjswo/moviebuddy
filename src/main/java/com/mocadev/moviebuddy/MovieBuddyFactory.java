@@ -1,9 +1,11 @@
 package com.mocadev.moviebuddy;
 
+import com.mocadev.moviebuddy.data.CsvMovieReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 /**
@@ -33,6 +35,15 @@ public class MovieBuddyFactory {
 
 	@Configuration
 	 static class DataSourceModuleConfig {
+
+		@Profile(MovieBuddyProfile.CSV_MODE)
+		@Bean
+		public CsvMovieReader csvMovieReader() {
+			CsvMovieReader movieReader = new CsvMovieReader();
+			movieReader.setMetaData("movie_metadata.csv");
+			return movieReader;
+		}
+
 	}
 
 }
