@@ -45,7 +45,8 @@ public class MovieBuddyFactory {
 		@Bean
 		public CsvMovieReader csvMovieReader() {
 			CsvMovieReader movieReader = new CsvMovieReader();
-			movieReader.setMetaData("movie_metadata.csv");
+
+			movieReader.setMetaData(System.getProperty("movie_metadata"));
 			return movieReader;
 		}
 
@@ -53,7 +54,7 @@ public class MovieBuddyFactory {
 		@Bean
 		public XmlMovieReader xmlMovieReader(Unmarshaller unmarshaller) {
 			XmlMovieReader movieReader = new XmlMovieReader(unmarshaller);
-			movieReader.setMetaData("movie_metadata.xml");
+			movieReader.setMetaData(System.getProperty("movie_metadata"));
 			return movieReader;
 		}
 
