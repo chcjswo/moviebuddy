@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -25,6 +26,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 @Import({MovieBuddyFactory.DataSourceModuleConfig.class,
 MovieBuddyFactory.DomainModuleConfig.class})
 @ComponentScan
+@PropertySource("/application.properties")
 public class MovieBuddyFactory {
 
 	@Bean
