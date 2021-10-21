@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author chcjswo
@@ -28,6 +29,7 @@ public abstract class AbstractFileSystemMovieReader {
 		return metaData;
 	}
 
+	@Value("${movie.metadata}")
 	public void setMetaData(String metaData) {
 		this.metaData = Objects.requireNonNull(metaData, "metadata is required value");
 	}
