@@ -1,18 +1,10 @@
 package com.mocadev.moviebuddy;
 
-import com.mocadev.moviebuddy.data.AbstractFileSystemMovieReader;
-import com.mocadev.moviebuddy.data.CsvMovieReader;
-import com.mocadev.moviebuddy.data.XmlMovieReader;
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
-import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 /**

@@ -3,6 +3,7 @@ package com.mocadev.moviebuddy.data;
 import java.io.FileNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.io.DefaultResourceLoader;
 
 /**
  * @author chcjswo
@@ -17,12 +18,14 @@ public class CsvMovieReaderTest {
 	void validMetadata() throws Exception {
 		final CsvMovieReader movieReader = new CsvMovieReader();
 		movieReader.setMetaData("movie_metadata.csv");
+		movieReader.setResourceLoader(new DefaultResourceLoader());
 		movieReader.afterPropertiesSet();
 	}
 
 	@Test
-	void invalidMetadata() throws Exception {
+	void invalidMetadata() {
 		final CsvMovieReader movieReader = new CsvMovieReader();
+		movieReader.setResourceLoader(new DefaultResourceLoader());
 		Assertions.assertThrows(FileNotFoundException.class, () -> {
 			movieReader.setMetaData("invalid");
 			movieReader.afterPropertiesSet();
